@@ -1,0 +1,40 @@
+{% extends 'app/base_tipo.html' %}
+{% block titulo %}Tipo de habitacion{% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center align-items-center g-2 p-5">
+        <div class="col-8">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for type in tipo %}
+                        <tr class="">
+                            <td scope="row">{{type.id_tipo_habitacion}}</td>
+                            <td>{{type.nom_tipo}}</td>
+                            <td>{{type.descrip_tipo}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="list-group">
+                <button type="button"
+                    class="list-group-item list-group-item-action list-group-item-success">Añadir</button>
+                <button type="button"
+                    class="list-group-item list-group-item-action list-group-item-primary">Modificar</button>
+                <button type="button"
+                    class="list-group-item list-group-item-action list-group-item-danger">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}
