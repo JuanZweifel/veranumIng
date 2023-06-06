@@ -9,3 +9,16 @@ class Tipo_habitacion(models.Model):
 
     def __str__(self):
         return f"{self.nom_tipo}"
+    
+class Habitacion(models.Model):
+    ESTADO_HABITACIONES= [
+    ("DS", "Disponible"),
+    ("ND", "No_disponible"),
+    ]
+    
+    id_habitacion=models.IntegerField(primary_key=True, null=False)
+    tipo_habitacion=models.ForeignKey(Tipo_habitacion, on_delete=models.PROTECT)
+    cant_camas=models.IntegerField(null=False, default=0)
+    cant_banos=models.IntegerField(null=False, default=0)
+    estado_habitacion=models.CharField(null=False, max_length=50, choices=ESTADO_HABITACIONES)
+    hotel=models.IntegerField(unique=True, null=False)
