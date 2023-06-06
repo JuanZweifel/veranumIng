@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect
 from .models import Tipo_habitacion
-from .forms import frmAddTipo
+from .forms import frmAddTipo, frmModifTipo
 # Create your views here.
 
 def tipo_habitacion(request):
@@ -27,3 +27,46 @@ def tipo_habitacion_add(request):
         "form":form
     }
     return render(request, 'app/tipo_habitacion_add.html', context)
+
+def tipo_habitacion_modif(request,id):
+    tipo_habitacion=get_object_or_404(Tipo_habitacion,id_tipo_habitacion=id)
+
+    form = frmModifTipo(instance=tipo_habitacion)
+    contexto={
+        "form":form,
+        "tipo_habitacion":tipo_habitacion
+    }
+
+    if request.method=="POST":
+
+        form=frmModifTipo(data=request.POST,instance=tipo_habitacion)
+
+        if form.is_valid():
+            
+            datos=form.cleaned_data
+            mtipo=Tipo_habitacion.objects.get(id_tipo_habitacion=tipo_habitacion.id_tipo_habitacion)
+            mtipo.nom_tipo=datos.get("nom_tipo")
+            mtipo.descrip_tipo=datos.get("descrip_tipo")
+            mtipo.precio=datos.get("precio")
+            mtipo.save()
+            return redirect(to="tipo_habitacion")
+
+    return render(request,"app/tipo_habitacion_modificar.html",contexto)
+
+
+def tipo_habitacion_eliminar(request,id):
+    tipo_habitacion=get_object_or_404(Tipo_habitacion,id_tipo_habitacion=id)
+
+
+    contexto={
+
+        "tipo_habitacion":tipo_habitacion
+    }
+
+    if request.method=="POST":
+        tipo_habitacion.delete()
+        return redirect(to="tipo_habitacion")
+
+
+    return render(request,"app/tipo_habitacion_delete.html",contexto)
+
