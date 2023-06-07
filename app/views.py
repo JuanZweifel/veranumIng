@@ -56,12 +56,17 @@ def tipo_habitacion_modif(request,id):
 
 
 def tipo_habitacion_eliminar(request,id):
-    tipo_habitacion=get_object_or_404(Tipo_habitacion,id_tipo_habitacion=id)
-
+    tipo_habi=get_object_or_404(Tipo_habitacion,id_tipo_habitacion=id)
+    try:
+        habi=Habitacion.objects.get(tipo_habitacion=tipo_habi)
+    
+    except:
+        habi=None
 
     contexto={
 
-        "tipo_habitacion":tipo_habitacion
+        "tipo_habitacion":tipo_habi,
+        "habi":habi
     }
 
     if request.method=="POST":
@@ -95,3 +100,7 @@ def habitacion_add(request):
         form = frmAddHabitacion()
 
     return render(request, "app/habitacion_add.html", {"form": form})
+
+
+def index(request):
+    return render(request, 'app/index.html')

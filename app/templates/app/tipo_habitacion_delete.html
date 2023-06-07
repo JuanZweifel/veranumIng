@@ -11,14 +11,23 @@
         
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {% if habi %}
+            <div class="alert alert-warning">
+                <strong>No es posible eliminar</strong> 
+                <p>Esta Tipo de habitacion tiene habitaciones asociadas, elimine primero las habitaciones asociadas</p>
+            </div>
+            <div>
+                <a href="{% url 'tipo_habitacion' %}" class="btn btn-primary text-light btn-lg">Volver</a>
+            </div>  
+            {% else %}
             <div class="alert alert-danger">
                 <strong>ADVERTENCIA!</strong> Esta seguro que desea eliminar a
                 <h1>{{tipo_habitacion.nom_tipo}} </h6>
             </div>
-
             <div>
                 <input type="submit" value="Eliminar" class="btn btn-danger text-light btn-lg">
             </div>
+            {% endif %}
         
         </form>
     </div>
@@ -28,3 +37,5 @@
 
 
 {% endblock contenido %}
+
+
