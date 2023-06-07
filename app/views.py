@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .models import Tipo_habitacion
-from .forms import frmAddTipo
+from .models import Tipo_habitacion, Habitacion
+from .forms import frmAddTipo, frmAddHabitacion
 # Create your views here.
 
 def tipo_habitacion(request):
@@ -27,3 +27,26 @@ def tipo_habitacion_add(request):
         "form":form
     }
     return render(request, 'app/tipo_habitacion_add.html', context)
+
+def habitacion(request):
+    habitaciones = Habitacion.objects.all()
+    
+    context = {
+        "habitaciones":habitaciones
+    }
+    
+    return render(request, "app/habitacion.html", context)
+
+def habitacion_add(request):
+    if request.method == "POST":
+        form = frmAddHabitacion(request.POST)
+        if form.is_valid():
+
+            form.save()
+
+            return HttpResponseRedirect("habitacion_add")
+
+    else:
+        form = frmAddHabitacion()
+
+    return render(request, "app/habitacion_add.html", {"form": form})

@@ -20,5 +20,5 @@ class Habitacion(models.Model):
     tipo_habitacion=models.ForeignKey(Tipo_habitacion, on_delete=models.PROTECT)
     cant_camas=models.IntegerField(null=False, default=0)
     cant_banos=models.IntegerField(null=False, default=0)
-    estado_habitacion=models.CharField(null=False, max_length=50, choices=ESTADO_HABITACIONES)
-    hotel=models.IntegerField(unique=True, null=False)
+    estado_habitacion=models.CharField(null=False, max_length=15, choices=ESTADO_HABITACIONES)
+    hotel=models.IntegerField(null=False)
