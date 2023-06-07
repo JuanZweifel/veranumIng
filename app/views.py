@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect
-from .models import Tipo_habitacion
+from .models import Tipo_habitacion, Habitacion
+from .forms import frmAddTipo, frmAddHabitacion
 from .forms import frmAddTipo, frmModifTipo
 # Create your views here.
 
@@ -70,3 +71,27 @@ def tipo_habitacion_eliminar(request,id):
 
     return render(request,"app/tipo_habitacion_delete.html",contexto)
 
+
+
+def habitacion(request):
+    habitaciones = Habitacion.objects.all()
+    
+    context = {
+        "habitaciones":habitaciones
+    }
+    
+    return render(request, "app/habitacion.html", context)
+
+def habitacion_add(request):
+    if request.method == "POST":
+        form = frmAddHabitacion(request.POST)
+        if form.is_valid():
+
+            form.save()
+
+            return HttpResponseRedirect("habitacion_add")
+
+    else:
+        form = frmAddHabitacion()
+
+    return render(request, "app/habitacion_add.html", {"form": form})

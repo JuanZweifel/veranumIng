@@ -1,0 +1,53 @@
+{% extends 'app/base_tipo.html' %}
+
+
+{% block title %}
+    Habitacion
+{% endblock title %}
+    
+
+{% block contenido %}
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <h3 class="m-auto">Habitaciones</h3>
+
+        <table class="table table-responsive w-100 table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">#id</th>
+                <th scope="col">Tipo Habitacion</th>
+                <th scope="col">Cant camas</th>
+                <th scope="col">Cant baños</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Hotel</th>
+                <th scope="col">Modificar</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for habitacion in  habitaciones %}
+                    <tr>
+                        <th scope="row">{{habitacion.id_habitacion}}</th>
+                        <td>{{habitacion.tipo_habitacion}}</td>
+                        <td>{{habitacion.cant_camas}}</td>
+                        <td>{{habitacion.cant_banos}}</td>
+                        <td>{{habitacion.estado_habitacion}}</td>
+                        <td>{{habitacion.hotel}}</td>
+                        <td><button class="btn btn-primary">Modificar</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-sm-2">
+        <div class="mt-5">
+            <a href="{% url 'habitacion_add' %}" role="button" class="btn btn-success">Añadir</a>
+            <a href="" role="button" class="btn btn-danger">Eliminar</a>
+        </div>
+        
+    </div>
+</div>
+
+
+{% endblock contenido %}
