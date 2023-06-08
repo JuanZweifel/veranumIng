@@ -1,0 +1,35 @@
+{% extends 'app/base_tipo.html' %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-6">
+        <h3>Eliminar Habitacion</h3>
+        
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if habitacion %}
+            <div class="alert alert-warning">
+                <strong>No es posible eliminar</strong>
+                <p>Esta habitación está asociada a otras entidades, elimine primero las asociaciones</p>
+            </div>
+            <div>
+                <a href="{% url 'habitacion' %}" class="btn btn-primary text-light btn-lg">Volver</a>
+            </div>
+            {% else %}
+            <div class="alert alert-danger">
+                <strong>ADVERTENCIA!</strong> ¿Está seguro que desea eliminar la habitación #{{ habitacion.id_habitacion }}?
+            </div>
+            <div>
+                <input type="submit" value="Eliminar" class="btn btn-danger text-light btn-lg">
+            </div>
+            {% endif %}
+        
+        </form>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+
+{% endblock contenido %}
