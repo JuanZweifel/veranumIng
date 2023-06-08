@@ -7,49 +7,43 @@
     
 
 {% block contenido %}
-
-<div class="row">
-    <div class="col-sm-2">
+<div class="container">
+    <div class="row justify-content-center align-items-center g-2 p-5">
+        <div class="col-sm-12">
+            <h3 class="m-auto mb-5 mt-5">Habitaciones</h3>
+            <a href="{% url 'habitacion_add' %}" role="button" class="btn btn-success mb-3">Añadir</a>
+            <div class="table-responsive">
+            <table class="table w-100 table-striped table-bordered">
+                <thead class="table-primary">
+                <tr>
+                    <th scope="col">#id</th>
+                    <th scope="col">Tipo Habitacion</th>
+                    <th scope="col">Cant camas</th>
+                    <th scope="col">Cant baños</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Hotel</th>
+                    <th scope="col">Acciones</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                    {% for habitacion in  habitaciones %}
+                        <tr>
+                            <th scope="row">{{habitacion.id_habitacion}}</th>
+                            <td>{{habitacion.tipo_habitacion}}</td>
+                            <td>{{habitacion.cant_camas}}</td>
+                            <td>{{habitacion.cant_banos}}</td>
+                            <td>{{habitacion.estado_habitacion}}</td>
+                            <td>{{habitacion.hotel}}</td>
+                            <td><button class="btn btn-primary">Modificar</button>
+                            <a href="" role="button" class="btn btn-danger">Eliminar</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-    <div class="col-sm-8">
-        <h3 class="m-auto mb-5 mt-5">Habitaciones</h3>
-        <a href="{% url 'habitacion_add' %}" role="button" class="btn btn-success mb-3">Añadir</a>
-        <div class="table-responsive">
-        <table class="table w-100 table-striped table-bordered">
-            <thead class="table-primary">
-            <tr>
-                <th scope="col">#id</th>
-                <th scope="col">Tipo Habitacion</th>
-                <th scope="col">Cant camas</th>
-                <th scope="col">Cant baños</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Hotel</th>
-                <th scope="col">Acciones</th>
-                
-            </tr>
-            </thead>
-            <tbody>
-                {% for habitacion in  habitaciones %}
-                    <tr>
-                        <th scope="row">{{habitacion.id_habitacion}}</th>
-                        <td>{{habitacion.tipo_habitacion}}</td>
-                        <td>{{habitacion.cant_camas}}</td>
-                        <td>{{habitacion.cant_banos}}</td>
-                        <td>{{habitacion.estado_habitacion}}</td>
-                        <td>{{habitacion.hotel}}</td>
-                        <td><button class="btn btn-primary">Modificar</button>
-                        <a href="" role="button" class="btn btn-danger">Eliminar</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    </div>
-    <div class="col-sm-2">
-        <div class="mt-5">
         </div>
-        
-    </div>
+</div>
 </div>
 
 
