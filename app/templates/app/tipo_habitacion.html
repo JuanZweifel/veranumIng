@@ -27,7 +27,7 @@
                             <td>{{type.nom_tipo}}</td>
                             <td>{{type.descrip_tipo}}</td>
                             <td>{{type.precio}}</td>
-                            <td><a href="{% url 'tipo_habitacion_modif' type.id_tipo_habitacion %}" role="button" class="btn btn-success text-light" style="margin-left: 10%;">Modificar</a>
+                            <td><a href="{% url 'tipo_habitacion_modif' type.id_tipo_habitacion %}" role="button" class="btn btn-primary text-light" style="margin-left: 10%;">Modificar</a>
                             <a href="{% url 'tipo_habitacion_eliminar' type.id_tipo_habitacion %}" role="button" class="btn btn-danger text-light" style="margin-left: 13%;">Eliminar</a> </td> 
                         </tr>
                         {% endfor %}
