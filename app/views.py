@@ -58,8 +58,7 @@ def tipo_habitacion_modif(request,id):
 def tipo_habitacion_eliminar(request,id):
     tipo_habi=get_object_or_404(Tipo_habitacion,id_tipo_habitacion=id)
     try:
-        habi=Habitacion.objects.get(tipo_habitacion=tipo_habi)
-    
+        habi=Habitacion.objects.filter(tipo_habitacion=tipo_habi)
     except:
         habi=None
 
@@ -70,7 +69,7 @@ def tipo_habitacion_eliminar(request,id):
     }
 
     if request.method=="POST":
-        tipo_habitacion.delete()
+        tipo_habi.delete()
         return redirect(to="tipo_habitacion")
 
 
@@ -94,7 +93,7 @@ def habitacion_add(request):
 
             form.save()
 
-            return HttpResponseRedirect("habitacion_add")
+            return HttpResponseRedirect("habitacion")
 
     else:
         form = frmAddHabitacion()

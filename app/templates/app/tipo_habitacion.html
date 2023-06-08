@@ -5,12 +5,8 @@
     <div class="row justify-content-center align-items-center g-2 p-5">
         <div class="col-12">
 
-            <div class="list-group">
-                <a style="all: unset" href={% url 'tipo_habitacion_add' %}><button type="button"
-                    class="list-group-item list-group-item-action list-group-item-success">Añadir</button></a>
-            </div>
-            
-<br>
+            <a style="all: unset" href={% url 'tipo_habitacion_add' %}><button type="button"
+                class="btn btn-success mb-2">Añadir</button></a>
 
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -32,11 +28,15 @@
                             <td>{{type.precio}}</td>
                             <td><a href="{% url 'tipo_habitacion_modif' type.id_tipo_habitacion %}" role="button" class="btn btn-success text-light" style="margin-left: 10%;">Modificar</a>
                             <a href="{% url 'tipo_habitacion_eliminar' type.id_tipo_habitacion %}" role="button" class="btn btn-danger text-light" style="margin-left: 13%;">Eliminar</a> </td> 
+                            <td>{{type.precio}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+            
+                
+            
         </div>
     </div>
 </div>
