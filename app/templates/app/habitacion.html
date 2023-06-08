@@ -35,8 +35,8 @@
                             <td>{{habitacion.cant_banos}}</td>
                             <td>{{habitacion.estado_habitacion}}</td>
                             <td>{{habitacion.hotel}}</td>
-                            <td><button class="btn btn-primary">Modificar</button>
-                            <a href="" role="button" class="btn btn-danger">Eliminar</td>
+                            <td><a href="{% url 'habitacion_modif' habitacion.id_habitacion %}" class="btn btn-primary">Modificar</a>
+                            <a href="{% url 'habitacion_eliminar' habitacion.id_habitacion %}" role="button" class="btn btn-danger">Eliminar</td>
                         </tr>
                     {% endfor %}
                 </tbody>

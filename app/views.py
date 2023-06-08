@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect
 from .models import Tipo_habitacion, Habitacion
 from .forms import frmAddTipo, frmAddHabitacion
-from .forms import frmAddTipo, frmModifTipo
+from .forms import frmAddTipo, frmModifTipo, frmModifHabitacion
 # Create your views here.
 
 def tipo_habitacion(request):
@@ -103,3 +103,35 @@ def habitacion_add(request):
 
 def index(request):
     return render(request, 'app/index.html')
+
+def habitacion_eliminar(request,id):
+    habi=get_object_or_404(Habitacion,id_habitacion=id)
+    contexto={
+        "habi":habi,
+    }
+
+    if request.method=="POST":
+        habi.delete()
+        return redirect(to="habitacion")
+
+
+    return render(request,"app/habitacion_delete.html",contexto)
+
+def habitacion_modif(request,id):
+    habi=get_object_or_404(Habitacion,id_habitacion=id)
+
+    form = frmModifHabitacion(instance=habi)
+    contexto={
+        "form":form,
+        "habi":habi
+    }
+
+    if request.method=="POST":
+
+        form=frmModifHabitacion(data=request.POST,instance=habi)
+
+        if form.is_valid():
+            form.save()
+            return redirect(to="habitacion")
+
+    return render(request,"app/habitacion_modificar.html",contexto)
