@@ -7,21 +7,21 @@
 <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-6">
-        <h3>Eliminar Tipo Habitacion</h3>
+        <h3>Eliminar Tipo Habitación</h3>
         
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% if habi %}
             <div class="alert alert-warning">
                 <strong>No es posible eliminar</strong> 
-                <p>Esta Tipo de habitacion tiene habitaciones asociadas, elimine primero las habitaciones asociadas</p>
+                <p>Elimine primero las habitaciones asociadas</p>
             </div>
             <div>
                 <a href="{% url 'tipo_habitacion' %}" class="btn btn-primary text-light btn-lg">Volver</a>
             </div>  
             {% else %}
             <div class="alert alert-danger">
-                <strong>ADVERTENCIA!</strong> Esta seguro que desea eliminar a
+                <strong>ADVERTENCIA!</strong> Esta seguro que desea eliminar a la habitación
                 <h1>{{tipo_habitacion.nom_tipo}} </h6>
             </div>
             <div>

@@ -1,14 +1,14 @@
 {% extends 'app/base_tipo.html' %}
 {% load crispy_forms_tags %}
 
-{% block titulo %}Modificar habitacion{% endblock titulo %}
+{% block titulo %}Modificar habitación{% endblock titulo %}
 
 {% block contenido %}
 
 <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
-        <h3>Modificar habitacion</h3>
+        <h3>Modificar habitación</h3>
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{form | crispy }}
