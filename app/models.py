@@ -28,3 +28,18 @@ class Habitacion(models.Model):
     cant_banos=models.PositiveIntegerField(null=False, default=0, validators=[MinValueValidator(1), MaxValueValidator(3)])
     estado_habitacion=models.CharField(null=False, max_length=15, choices=ESTADO_HABITACIONES)
     hotel=models.CharField(null=False,max_length=15, choices=HOTELES)
+    
+    
+class Cliente(models.Model):
+    DIGITOS_VERIFICADORES=[
+        ("1","1"),("2","2"),("3","3"),("4","4"),("5","5"),("6","6"),("7","7"),("8","8"),("9","9"),("0","0"),("K","K")
+    ]
+    
+    
+    run=models.PositiveIntegerField(primary_key=True, null=False, validators=[MinValueValidator(1000000), MaxValueValidator(99999999)])  
+    dv=models.CharField(null=False, max_length=1, choices=DIGITOS_VERIFICADORES) 
+    primer_nombre=models.CharField(max_length=30, null=False)
+    segundo_nombre=models.CharField(max_length=30, null=False)
+    apellido_paterno=models.CharField(max_length=30, null=False)
+    apellido_materno=models.CharField(max_length=30, null=False)
+    correo=models.EmailField(max_length=254)

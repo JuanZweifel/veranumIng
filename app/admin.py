@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Tipo_habitacion, Habitacion
+from app.models import Tipo_habitacion, Habitacion, Cliente
 
 # Register your models here.
 
@@ -16,8 +16,19 @@ class admHabitacion(admin.ModelAdmin):
     
     class Meta:
         model=Habitacion
+        
+        
+class admCliente(admin.ModelAdmin):
+    list_display=["run", "primer_nombre", "segundo_nombre", "apellido_paterno", "apellido_materno", "correo"]
+    list_editables=["primer_nombre", "segundo_nombre", "apellido_paterno", "apellido_materno", "correo"]
+
+    class Meta:
+        model=Cliente
+    
     
 
 admin.site.register(Tipo_habitacion, admTipo_habitacion)
 
 admin.site.register(Habitacion, admHabitacion)
+
+admin.site.register(Cliente, admCliente)
