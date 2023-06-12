@@ -28,3 +28,10 @@ class Habitacion(models.Model):
     cant_banos=models.PositiveIntegerField(null=False, default=0, validators=[MinValueValidator(1), MaxValueValidator(3)])
     estado_habitacion=models.CharField(null=False, max_length=15, choices=ESTADO_HABITACIONES)
     hotel=models.CharField(null=False,max_length=15, choices=HOTELES)
+
+class Reserva(models.Model):
+    id_reserva=models.AutoField(primary_key=True, null=False)
+    fecha_reservacion=models.DateField(null=False)
+    fecha_inicio=models.DateField(null=False)
+    fecha_termino=models.DateField(null=False)
+    total_reserva=models.PositiveIntegerField(null=False, validators=[MinValueValidator(1)])
