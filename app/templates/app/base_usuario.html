@@ -37,9 +37,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Reservas</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Iniciar sesión</a>
-                        </li>
+                    </ul>
+                    <ul class="navbar-nav" style="position: fixed;right:2%">
+                        {% if user.is_authenticated %}
+                        <li><a class="nav-link" href="#">{{user.username}}</a></li>
+                        <li><a class="nav-link" href="{% url 'index_usuario' %}">Cerrar Sesión</a></li>
+                        {% else %}
+                        <li><a class="nav-link" href="#">Iniciar Sesión</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

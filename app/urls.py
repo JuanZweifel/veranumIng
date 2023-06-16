@@ -2,6 +2,9 @@ from django.urls import include,path
 from .views import tipo_habitacion,tipo_habitacion_add, tipo_habitacion_modif,tipo_habitacion_eliminar, habitacion_eliminar
 from .views import tipo_habitacion,tipo_habitacion_add, habitacion,habitacion_add, index, habitacion_modif
 from .views import index_usuario
+from .views import crear_cuenta
+from .views import modificar_perfil
+
 
 urlpatterns = [
     path('tipo_habitacion', tipo_habitacion, name='tipo_habitacion'),
@@ -13,5 +16,7 @@ urlpatterns = [
     path('tipo_habitacion_modif/<id>', tipo_habitacion_modif, name='tipo_habitacion_modif'),
     path('tipo_habitacion_eliminar/<id>', tipo_habitacion_eliminar, name='tipo_habitacion_eliminar'),
     path('', index, name='index'),
-    path('index_usuario', index_usuario, name='index_usuario')
+    path('index_usuario', index_usuario, name='index_usuario'),
+    path('accounts/crear_cuenta', crear_cuenta, name='crear_cuenta'),
+    path('modificar_perfil/<id>', modificar_perfil, name='modificar_perfil')
 ]
