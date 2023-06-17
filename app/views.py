@@ -119,19 +119,14 @@ def habitacion_eliminar(request,id):
 
 def habitacion_modif(request,id):
     habi=get_object_or_404(Habitacion,id_habitacion=id)
-
     form = frmModifHabitacion(instance=habi)
     contexto={
         "form":form,
         "habi":habi
     }
-
     if request.method=="POST":
-
         form=frmModifHabitacion(data=request.POST,instance=habi)
-
         if form.is_valid():
             form.save()
             return redirect(to="habitacion")
-
     return render(request,"app/habitacion_modificar.html",contexto)
