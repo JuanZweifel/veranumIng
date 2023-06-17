@@ -35,3 +35,17 @@ class Reserva(models.Model):
     fecha_inicio=models.DateField(null=False)
     fecha_termino=models.DateField(null=False)
     total_reserva=models.PositiveIntegerField(null=False, validators=[MinValueValidator(1)])
+    
+    
+class Cliente(models.Model):
+    DIGITOS_VERIFICADORES=[
+        ("1","1"),("2","2"),("3","3"),("4","4"),("5","5"),("6","6"),("7","7"),("8","8"),("9","9"),("0","0"),("K","K")
+    ]
+    
+    run=models.PositiveIntegerField(primary_key=True, null=False, validators=[MinValueValidator(1000000), MaxValueValidator(99999999)])  
+    dv=models.CharField(null=False, max_length=1, choices=DIGITOS_VERIFICADORES) 
+    primer_nombre=models.CharField(max_length=30, null=False)
+    segundo_nombre=models.CharField(max_length=30, null=False)
+    apellido_paterno=models.CharField(max_length=30, null=False)
+    apellido_materno=models.CharField(max_length=30, null=False)
+    correo=models.EmailField(max_length=254)

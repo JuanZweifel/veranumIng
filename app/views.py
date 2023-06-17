@@ -104,6 +104,11 @@ def habitacion_add(request):
 def index(request):
     return render(request, 'app/index.html')
 
+
+def index_usuario(request):
+    return render(request, 'app/index_usuario.html')
+
+
 def habitacion_eliminar(request,id):
     habi=get_object_or_404(Habitacion,id_habitacion=id)
     contexto={
