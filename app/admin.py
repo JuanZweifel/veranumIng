@@ -18,8 +18,8 @@ class admHabitacion(admin.ModelAdmin):
         model=Habitacion
 
 class admReserva(admin.ModelAdmin):
-    list_display=["id_reserva", "fecha_reserva", "fecha_inicio", "fecha_termino", "total_reserva"]
-    list_editables=["fecha_reserva", "fecha_inicio", "fecha_termino", "total_reserva"]
+    list_display=["id_reserva", "fecha_reservacion", "fecha_inicio", "fecha_termino", "total_reserva"]
+    list_editables=["fecha_reservacion", "fecha_inicio", "fecha_termino", "total_reserva"]
         
     class Meta:
         model=Reserva

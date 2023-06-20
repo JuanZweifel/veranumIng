@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect
-from .models import Tipo_habitacion, Habitacion
+from .models import Tipo_habitacion, Habitacion, Reserva
 from .forms import frmAddTipo, frmAddHabitacion
-from .forms import frmAddTipo, frmModifTipo, frmModifHabitacion
+from .forms import frmAddTipo, frmModifTipo, frmModifHabitacion, frmRecepcionista
 # Create your views here.
 
 def tipo_habitacion(request):
@@ -75,8 +75,6 @@ def tipo_habitacion_eliminar(request,id):
 
     return render(request,"app/tipo_habitacion_delete.html",contexto)
 
-
-
 def habitacion(request):
     habitaciones = Habitacion.objects.all()
     
@@ -119,7 +117,6 @@ def habitacion_eliminar(request,id):
         habi.delete()
         return redirect(to="habitacion")
 
-
     return render(request,"app/habitacion_delete.html",contexto)
 
 def habitacion_modif(request,id):
@@ -135,3 +132,22 @@ def habitacion_modif(request,id):
             form.save()
             return redirect(to="habitacion")
     return render(request,"app/habitacion_modificar.html",contexto)
+
+def verificarReserva(request):
+    if request.method == "POST":
+        form = frmRecepcionista(request.POST)
+        rut = form.data['run']
+        return redirect('recepcionista', id=rut)
+    else:
+        form = frmRecepcionista()
+        context = {
+            "form":form
+        }
+        return render(request,"app/verificarReserva.html",context)
+
+def recepcionista(request, id):
+    reserva = Reserva.objects.filter(run_cliente=id)
+    context = {
+        "reserva":reserva
+    }
+    return render(request, "app/recepcionista.html",context)
