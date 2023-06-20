@@ -33,7 +33,6 @@ class Habitacion(models.Model):
     estado_habitacion=models.CharField(null=False, max_length=15, choices=ESTADO_HABITACIONES)
     hotel=models.CharField(null=False,max_length=15, choices=HOTELES)
     
-    
 class Cliente(models.Model):
     DIGITOS_VERIFICADORES=[
         ("1","1"),("2","2"),("3","3"),("4","4"),("5","5"),("6","6"),("7","7"),("8","8"),("9","9"),("0","0"),("K","K")
@@ -49,3 +48,13 @@ class Cliente(models.Model):
     apellido_paterno=models.CharField(max_length=30, null=False, validators=[validarletras])
     apellido_materno=models.CharField(max_length=30, null=False, validators=[validarletras])
     correo=models.EmailField(max_length=254)
+
+class Reserva(models.Model):
+    id_reserva=models.AutoField(primary_key=True, null=False)
+    fecha_reservacion=models.DateField(null=False)
+    fecha_inicio=models.DateField(null=False)
+    fecha_termino=models.DateField(null=False)
+    total_reserva=models.PositiveIntegerField(null=False, validators=[MinValueValidator(1)])
+    run_cliente=models.ForeignKey(Cliente, on_delete=models.PROTECT)
+    #run_empleado=models.ForeignKey(, on_delete=models.PROTECT)
+    

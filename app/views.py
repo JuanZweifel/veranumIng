@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect
+from .models import Tipo_habitacion, Habitacion, Reserva
 from django.http.response import JsonResponse
 from .models import Tipo_habitacion, Habitacion, Cliente
 from .forms import frmAddTipo, frmAddHabitacion
-from .forms import frmAddTipo, frmModifTipo, frmModifHabitacion
+from .forms import frmAddTipo, frmModifTipo, frmModifHabitacion, frmRecepcionista
 from .forms import frmCrearCuenta
 from .forms import frmPerfilCliente, frmModifDatosCliente
 from django.contrib.auth.models import User
-
 # Create your views here.
 def clientes(request):
     
@@ -139,8 +139,6 @@ def tipo_habitacion_eliminar(request,id):
 
     return render(request,"app/tipo_habitacion_delete.html",contexto)
 
-
-
 def habitacion(request):
     habitaciones = Habitacion.objects.all()
     
@@ -184,24 +182,37 @@ def habitacion_eliminar(request,id):
         habi.delete()
         return redirect(to="habitacion")
 
-
     return render(request,"app/habitacion_delete.html",contexto)
 
 def habitacion_modif(request,id):
     habi=get_object_or_404(Habitacion,id_habitacion=id)
-
     form = frmModifHabitacion(instance=habi)
     contexto={
         "form":form,
         "habi":habi
     }
-
     if request.method=="POST":
-
         form=frmModifHabitacion(data=request.POST,instance=habi)
-
         if form.is_valid():
             form.save()
             return redirect(to="habitacion")
-
     return render(request,"app/habitacion_modificar.html",contexto)
+
+def verificarReserva(request):
+    if request.method == "POST":
+        form = frmRecepcionista(request.POST)
+        rut = form.data['run']
+        return redirect('recepcionista', id=rut)
+    else:
+        form = frmRecepcionista()
+        context = {
+            "form":form
+        }
+        return render(request,"app/verificarReserva.html",context)
+
+def recepcionista(request, id):
+    reserva = Reserva.objects.filter(run_cliente=id)
+    context = {
+        "reserva":reserva
+    }
+    return render(request, "app/recepcionista.html",context)
