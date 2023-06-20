@@ -1,0 +1,49 @@
+{% extends 'app/base_tipo.html' %}
+{% load static %}
+
+
+{% block contenido %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 cot-xl-12">
+            <div class="table-responsive">
+                <table id="datatable-responsive" class="table">
+                    <thead>
+                        <tr>
+                            <th class="centered">Rut</th>
+                            <th class="centered">DV</th>
+                            <th class="centered">P Nombre</th>
+                            <th class="centered">S Nombre</th>
+                            <th class="centered">P Apellido</th>
+                            <th class="centered">S Apellido</th>
+                            <th class="centered">Correo</th>
+                            <th class="centered">Opciones</th>
+                        </tr>
+                        
+
+                    </thead>
+                    <tbody id="table_body_clientes">
+                        
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- Data tables js -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- DataTable.js -->
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"></script>
+
+<script src="{% static 'js/clientes.js' %}"></script>
+{% endblock contenido %}

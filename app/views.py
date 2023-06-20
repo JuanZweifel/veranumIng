@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect
+from django.http.response import JsonResponse
 from .models import Tipo_habitacion, Habitacion, Cliente
 from .forms import frmAddTipo, frmAddHabitacion
 from .forms import frmAddTipo, frmModifTipo, frmModifHabitacion
@@ -8,7 +9,17 @@ from .forms import frmPerfilCliente, frmModifDatosCliente
 from django.contrib.auth.models import User
 
 # Create your views here.
+def clientes(request):
+    
+    
+    return render(request, "app/clientes.html")
 
+def lista_clientes(_request):
+    clientes = list(Cliente.objects.values())
+    data={'clientes':clientes}
+    return JsonResponse(data)
+
+    
 def modificar_perfil(request,id):
     modificar=get_object_or_404(Cliente,run=id)
     
