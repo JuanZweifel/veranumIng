@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 # Create your models here.
 
-validarletras = RegexValidator(r'^[a-zA-Z]*$', 'Ingrese solo letras')
+validarletras = RegexValidator(r'^[a-zA-ZñÑ]*$', 'Ingrese solo letras')
 
 class Tipo_habitacion(models.Model):
     id_tipo_habitacion=models.AutoField(primary_key=True, null=False)
-    nom_tipo=models.CharField(max_length=50, null=False, unique=True, validators=[validarletras])
+    nom_tipo=models.CharField(max_length=50, null=False, unique=True)
     descrip_tipo=models.TextField(null=True)
     precio=models.PositiveIntegerField(null=False,  validators=[MinValueValidator(1)])
 
