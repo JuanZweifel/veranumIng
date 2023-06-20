@@ -1,9 +1,73 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponseRedirect
-from .models import Tipo_habitacion, Habitacion
+from django.http.response import JsonResponse
+from .models import Tipo_habitacion, Habitacion, Cliente
 from .forms import frmAddTipo, frmAddHabitacion
 from .forms import frmAddTipo, frmModifTipo, frmModifHabitacion
+from .forms import frmCrearCuenta
+from .forms import frmPerfilCliente, frmModifDatosCliente
+from django.contrib.auth.models import User
+
 # Create your views here.
+def clientes(request):
+    
+    
+    return render(request, "app/clientes.html")
+
+def lista_clientes(_request):
+    clientes = list(Cliente.objects.values())
+    data={'clientes':clientes}
+    return JsonResponse(data)
+
+    
+def modificar_perfil(request,id):
+    modificar=get_object_or_404(Cliente,run=id)
+    
+    form = frmModifDatosCliente(instance=modificar)
+    contexto={
+        "form":form,
+        "modificar":modificar
+    }
+    
+    if request.method=="POST":
+        
+        form=frmModifDatosCliente(data=request.POST,instance=modificar)
+        
+        if form.is_valid():
+            form.save()
+            return redirect(to="modificar")
+
+    return render(request,"app/modificar_cliente.html",contexto)
+
+
+def crear_cuenta(request):
+    formext=frmCrearCuenta(request.POST or None)
+    formnormal=frmPerfilCliente(request.POST or None)
+
+    contexto={
+        "form":formext,
+        "fuser":formnormal
+        
+    }
+
+    if request.method=="POST":
+        if formnormal.is_valid() and formext.is_valid():
+            formext.save()
+            datoext=formext.cleaned_data
+            usr=User.objects.get(username=datoext.get("username"))
+            u=Cliente()
+            datos=formnormal.cleaned_data
+            u.run=datos.get("run")
+            u.dv=datos.get("dv")
+            u.primer_nombre=datos.get("primer_nombre")
+            u.segundo_nombre=datos.get("segundo_nombre")
+            u.apellido_paterno=datos.get("apellido_paterno")
+            u.apellido_materno=datos.get("apellido_materno")
+            u.correo=datos.get("correo")
+            u.usuario=usr
+            u.save()
+        
+    return render(request,"app/registration/crear_cuenta.html",contexto)
 
 def tipo_habitacion(request):
     tipo = Tipo_habitacion.objects.all()
@@ -86,6 +150,7 @@ def habitacion(request):
     
     return render(request, "app/habitacion.html", context)
 
+
 def habitacion_add(request):
     if request.method == "POST":
         form = frmAddHabitacion(request.POST)
@@ -103,6 +168,11 @@ def habitacion_add(request):
 
 def index(request):
     return render(request, 'app/index.html')
+
+
+def index_usuario(request):
+    return render(request, 'app/index_usuario.html')
+
 
 def habitacion_eliminar(request,id):
     habi=get_object_or_404(Habitacion,id_habitacion=id)
