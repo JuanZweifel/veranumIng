@@ -67,7 +67,7 @@ def crear_cuenta(request):
             u.usuario=usr
             u.save()
         
-    return render(request,"app/registration/crear_cuenta.html",contexto)
+    return render(request,"registration/crear_cuenta.html",contexto)
 
 def tipo_habitacion(request):
     tipo = Tipo_habitacion.objects.all()
