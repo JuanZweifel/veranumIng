@@ -9,6 +9,7 @@ from .forms import frmCrearCuenta
 from .forms import frmPerfilCliente, frmModifDatosCliente
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import permission_required, login_required
 # Create your views here.
 def clientes(request):
     
@@ -20,6 +21,16 @@ def lista_clientes(_request):
     data={'clientes':clientes}
     return JsonResponse(data)
 
+@login_required
+def perfil_cliente(request):
+    usuario=request.user
+    cliente=Cliente.objects.get(usuario=usuario)
+    contexto={
+        "cliente":cliente
+    }
+    
+    
+    return render(request, "app/perfil_usuario.html", contexto)
 
 def modificar_perfil(request,id):
     modificar=get_object_or_404(Cliente,run=id)

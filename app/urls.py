@@ -4,7 +4,7 @@ from .views import tipo_habitacion,tipo_habitacion_add, habitacion,habitacion_ad
 from .views import index_usuario,verificarReserva,recepcionista
 from .views import crear_cuenta, clientes, lista_clientes
 from .views import modificar_perfil
-
+from .views import perfil_cliente
 
 urlpatterns = [
     path('tipo_habitacion', tipo_habitacion, name='tipo_habitacion'),
@@ -23,4 +23,5 @@ urlpatterns = [
     path('modificar_perfil/<id>', modificar_perfil, name='modificar_perfil'),
     path('clientes', clientes, name= 'clientes'),
     path('lista_clientes/',lista_clientes, name='lista_clientes'),
+    path('perfil_cliente', perfil_cliente, name='perfil_cliente'),
 ]
