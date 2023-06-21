@@ -47,7 +47,7 @@ class Cliente(models.Model):
     segundo_nombre=models.CharField(max_length=30, null=False, validators=[validarletras])
     apellido_paterno=models.CharField(max_length=30, null=False, validators=[validarletras])
     apellido_materno=models.CharField(max_length=30, null=False, validators=[validarletras])
-    correo=models.EmailField(max_length=254)
+    correo=models.EmailField(max_length=254, unique=True)
 
 class Reserva(models.Model):
     id_reserva=models.AutoField(primary_key=True, null=False)
