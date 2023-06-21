@@ -44,7 +44,7 @@ class frmModifDatosCliente(forms.ModelForm):
     
     class Meta:
         model=Cliente
-        fields=["correo"]
+        fields=["primer_nombre","segundo_nombre","apellido_paterno","apellido_materno","correo"]
 
 class frmRecepcionista(forms.ModelForm):
     class Meta:

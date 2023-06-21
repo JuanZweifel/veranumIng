@@ -8,21 +8,10 @@
 <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
+        <br>
         <h3>Modificar cliente</h3>
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <label class="form-label" for="pnomnre">Primer nombre</label>
-            <input class="form-control" type="text" disabled name="pnombre" value="{{modificar.primer_nombre}}">
-            <br>
-            <label for="pnomnre">Segundo nombre</label>
-            <input class="form-control" type="text" disabled name="snombre" value="{{modificar.segundo_nombre}}">
-            <br>
-            <label for="pnomnre">Primer apellido</label>
-            <input class="form-control" type="text" disabled name="papellido" value="{{modificar.apellido_paterno}}">
-            <br>
-            <label for="pnomnre">Segundo apellido</label>
-            <input class="form-control" type="text" disabled name="sapellido" value="{{modificar.apellido_materno}}">
-            <br>
             <label for="run">Run</label>
             <input class="form-control" type="text" disabled name="run" value="{{modificar.run}}">
             <br>

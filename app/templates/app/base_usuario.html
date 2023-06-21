@@ -18,7 +18,7 @@
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    {% block head %}{% endblock head %}
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                     </ul>
                     <ul class="navbar-nav" style="position: fixed;right:2%">
                         {% if user.is_authenticated %}
-                        <li><a class="nav-link" href="#">{{user.username}}</a></li>
+                        <li><a class="nav-link" href="{% url 'perfil_cliente' %}">{{user.username}}</a></li>
                         <li><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a></li>
                         {% else %}
                         <li><a class="nav-link" href="{% url 'loginn' %}">Iniciar Sesión</a></li>
