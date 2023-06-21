@@ -19,7 +19,7 @@ def lista_clientes(_request):
     data={'clientes':clientes}
     return JsonResponse(data)
 
-    
+
 def modificar_perfil(request,id):
     modificar=get_object_or_404(Cliente,run=id)
     
@@ -35,7 +35,7 @@ def modificar_perfil(request,id):
         
         if form.is_valid():
             form.save()
-            return redirect(to="modificar")
+            return redirect(to="clientes")
 
     return render(request,"app/modificar_cliente.html",contexto)
 
@@ -57,7 +57,7 @@ def crear_cuenta(request):
             usr=User.objects.get(username=datoext.get("username"))
             u=Cliente()
             datos=formnormal.cleaned_data
-            u.run=datos.get("run")
+            u.run=datos.get("run") 
             u.dv=datos.get("dv")
             u.primer_nombre=datos.get("primer_nombre")
             u.segundo_nombre=datos.get("segundo_nombre")
