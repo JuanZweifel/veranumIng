@@ -43,6 +43,23 @@ def lista_clientes(_request):
     data={'clientes':clientes}
     return JsonResponse(data)
 
+
+def eliminar_cliente(request,id):
+    cliente=get_object_or_404(Cliente,run=id)
+    id = cliente.usuario_id
+    usuario=User.objects.get(id=id)
+    contexto={
+
+        "cliente":cliente
+    }
+
+    if request.method=="POST":
+        usuario.delete()
+        messages.success(request,"Cliente eliminado correctamente")
+        return redirect(to="clientes")
+    
+    return render(request,"app/clientes_delete.html",contexto)
+
 @login_required
 def perfil_cliente(request):
     usuario=request.user
@@ -53,21 +70,6 @@ def perfil_cliente(request):
     
     
     return render(request, "app/perfil_usuario.html", contexto)
-
-def eliminar_cliente(request,id):
-    cliente=get_object_or_404(Cliente,run=id)
-
-    contexto={
-
-        "cliente":cliente
-    }
-
-    if request.method=="POST":
-        cliente.delete()
-        messages.success(request,"Cliente eliminado correctamente")
-        return redirect(to="clientes")
-    
-    return render(request,"app/clientes_delete.html",contexto)
 
 
 
