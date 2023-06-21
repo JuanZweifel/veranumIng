@@ -8,6 +8,7 @@ from .forms import frmAddTipo, frmModifTipo, frmModifHabitacion, frmRecepcionist
 from .forms import frmCrearCuenta
 from .forms import frmPerfilCliente, frmModifDatosCliente
 from django.contrib.auth.models import User
+from django.contrib import messages
 # Create your views here.
 def clientes(request):
     
@@ -66,7 +67,9 @@ def crear_cuenta(request):
             u.correo=datos.get("correo")
             u.usuario=usr
             u.save()
-        
+            messages.success(request,"Cuenta creada correctamente")
+            return redirect(to="index_usuario")
+            
     return render(request,"registration/crear_cuenta.html",contexto)
 
 def tipo_habitacion(request):
@@ -85,6 +88,7 @@ def tipo_habitacion_add(request):
             # process the data in form.cleaned_data as required
             form.save()
             # redirect to a new URL:
+            messages.success(request,"Tipo de habitación añadida correctamente")
             return HttpResponseRedirect('tipo_habitacion')
     else:
         form = frmAddTipo()
@@ -114,6 +118,7 @@ def tipo_habitacion_modif(request,id):
             mtipo.descrip_tipo=datos.get("descrip_tipo")
             mtipo.precio=datos.get("precio")
             mtipo.save()
+            messages.success(request,"Tipo de habitación modificada correctamente")
             return redirect(to="tipo_habitacion")
 
     return render(request,"app/tipo_habitacion_modificar.html",contexto)
@@ -134,6 +139,7 @@ def tipo_habitacion_eliminar(request,id):
 
     if request.method=="POST":
         tipo_habi.delete()
+        messages.success(request,"Tipo de habitación eliminada correctamente")
         return redirect(to="tipo_habitacion")
 
 
@@ -155,7 +161,7 @@ def habitacion_add(request):
         if form.is_valid():
 
             form.save()
-
+            messages.success(request,"Habitación añadida correctamente")  
             return HttpResponseRedirect("habitacion")
 
     else:
@@ -180,6 +186,7 @@ def habitacion_eliminar(request,id):
 
     if request.method=="POST":
         habi.delete()
+        messages.success(request,"Habitación eliminada correctamente")  
         return redirect(to="habitacion")
 
     return render(request,"app/habitacion_delete.html",contexto)
@@ -195,6 +202,7 @@ def habitacion_modif(request,id):
         form=frmModifHabitacion(data=request.POST,instance=habi)
         if form.is_valid():
             form.save()
+            messages.success(request,"Habitación modificada correctamente")  
             return redirect(to="habitacion")
     return render(request,"app/habitacion_modificar.html",contexto)
 
