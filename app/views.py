@@ -54,6 +54,23 @@ def perfil_cliente(request):
     
     return render(request, "app/perfil_usuario.html", contexto)
 
+def eliminar_cliente(request,id):
+    cliente=get_object_or_404(Cliente,run=id)
+
+    contexto={
+
+        "cliente":cliente
+    }
+
+    if request.method=="POST":
+        cliente.delete()
+        messages.success(request,"Cliente eliminado correctamente")
+        return redirect(to="clientes")
+    
+    return render(request,"app/clientes_delete.html",contexto)
+
+
+
 def modificar_perfil(request,id):
     modificar=get_object_or_404(Cliente,run=id)
     

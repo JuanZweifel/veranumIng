@@ -49,7 +49,7 @@ const listaclientes=async()=>{
                     <td>${cliente.correo}</td>
                     <td>
                     <a href="modificar_perfil/ ${cliente.run}" role="button" class="btn btn-primary text-light">Modificar</a>
-                    <a href="#" role="button" class="btn btn-danger text-light">Eliminar</a> </td>
+                    <a href="eliminar_cliente/ ${cliente.run}" role="button" class="btn btn-danger text-light">Eliminar</a> </td>
                     </td>
                 </tr>`;
         });
