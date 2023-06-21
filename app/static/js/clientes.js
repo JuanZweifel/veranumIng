@@ -8,10 +8,12 @@ const dataTableOptions = {
         {className: "centered", targets: [0,1,2,3,4,5,6,7] },
         {orderable:false, targets:[1,3,5,6]},
         {searchable:false,targets:[1,7]},
-
     ],
     pageLength: 4,
-    destroy: true
+    destroy: true,
+    language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json',
+    }
 };
 
 

@@ -2,7 +2,7 @@ from django import forms
 from .models import Tipo_habitacion, Habitacion, Cliente
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from django.contrib.auth.forms import AuthenticationForm
 class frmAddTipo(forms.ModelForm):
     class Meta:
         model=Tipo_habitacion
@@ -50,3 +50,7 @@ class frmRecepcionista(forms.ModelForm):
     class Meta:
         model=Cliente
         fields = ["run"]
+        
+        
+class LoginForm(AuthenticationForm):
+    pass

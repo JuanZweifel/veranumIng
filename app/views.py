@@ -9,6 +9,28 @@ from .forms import frmCrearCuenta
 from .forms import frmPerfilCliente, frmModifDatosCliente
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from .forms import LoginForm
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                if user.is_staff:
+                    return redirect(to="index_admin")  # Redirige al apartado de administración
+                else:
+                    return redirect(to="index_usuario")  # Redirige a la página de inicio de usuario normal
+    else:
+        form = LoginForm()
+    
+    return render(request, 'registration/loginn.html', {'form': form})
+
 # Create your views here.
 def clientes(request):
     
