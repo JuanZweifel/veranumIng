@@ -15,15 +15,31 @@
                         <tr>
                             <th scope="col">Cliente</th>
                             <th scope="col">Reserva</th>
+                            <th scope="col">Habitacion</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% if not reserva %}
+                        <tr class="">
+                            <td scope="row">
+                                No hay reservas registradas con el cliente
+                            </td>
+                            <td scope="row">
+                                0
+                            </td>
+                            <td scope="row">
+                                0
+                            </td>
+                        </tr>
+
+                        {% endif %}
                         {% for res in reserva%}
                         <tr class="">
                             <td scope="row">{{res.run_cliente.primer_nombre}} {{res.run_cliente.segundo_nombre}}
                                 {{res.run_cliente.apellido_paterno}} {{res.run_cliente.apellido_materno}}
                             </td>
                             <td>{{res.fecha_inicio}} hasta {{res.fecha_termino}}</td>
+                            <td>{{res.habitacion.id_habitacion}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -33,3 +49,24 @@
     </div>
 </div>
 {% endblock contenido %}
+{% block alerta %}
+    {% if not reserva %}
+    <script>
+        Swal.fire({
+            "title": "",
+            "text": "{{m}}",
+            "icon": "warning",
+            "confirmButtonColor": "#87b56d"
+        })
+    </script>
+    {% else %}
+    <script>
+        Swal.fire({
+            "title": "Felicitaciones",
+            "text": "{{m}}",
+            "icon": "success",
+            "confirmButtonColor": "#87b56d"
+        })
+    </script>
+    {% endif %}
+{% endblock alerta %}

@@ -23,6 +23,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                messages.success(request,"Identificado correctamente")
                 if user.is_staff:
                     return redirect(to="index_admin")  # Redirige al apartado de administración
                 else:
@@ -92,6 +93,7 @@ def modificar_perfil_user(request,id):
         
         if form.is_valid():
             form.save()
+            messages.success(request,"Cuenta modificada correctamente")
             return redirect(to="index_usuario")
 
     return render(request,"app/modificar_cliente_user.html",contexto)
@@ -124,6 +126,7 @@ def modificar_perfil(request,id):
         
         if form.is_valid():
             form.save()
+            messages.success(request,"Cuenta modificada correctamente")
             return redirect(to="clientes")
 
     return render(request,"app/modificar_cliente.html",contexto)
@@ -296,18 +299,24 @@ def habitacion_modif(request,id):
 
 def verificarReserva(request):
     if request.method == "POST":
-        form = frmRecepcionista(request.POST)
-        rut = form.data['run']
-        return redirect('recepcionista', id=rut)
+        form = frmRecepcionista(data=request.POST)
+        if form.is_valid():
+            form = frmRecepcionista(request.POST)
+            rut = form.data['rut']
+            return redirect('recepcionista', id=rut)
     else:
         form = frmRecepcionista()
-        context = {
-            "form":form
-        }
-        return render(request,"app/verificarReserva.html",context)
+    context = {
+        "form":form
+    }
+    return render(request,"app/verificarReserva.html",context)
 
 def recepcionista(request, id):
     reserva = Reserva.objects.filter(run_cliente=id)
+    if not reserva:
+        messages.error(request,"Sin reservas registradas")
+    else:
+        messages.error(request,"Existe reservas registradas")
     context = {
         "reserva":reserva
     }

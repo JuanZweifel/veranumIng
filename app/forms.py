@@ -3,6 +3,8 @@ from .models import Tipo_habitacion, Habitacion, Cliente
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 class frmAddTipo(forms.ModelForm):
     class Meta:
         model=Tipo_habitacion
@@ -46,11 +48,8 @@ class frmModifDatosCliente(forms.ModelForm):
         model=Cliente
         fields=["primer_nombre","segundo_nombre","apellido_paterno","apellido_materno","correo"]
 
-class frmRecepcionista(forms.ModelForm):
-    class Meta:
-        model=Cliente
-        fields = ["run"]
-        
+class frmRecepcionista(forms.Form):
+    rut = forms.IntegerField(label="Run sin digito verificador", validators=[MinValueValidator(1000000), MaxValueValidator(99999999)])
         
 class LoginForm(AuthenticationForm):
     pass
