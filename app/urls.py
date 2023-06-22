@@ -2,7 +2,7 @@ from django.urls import include,path
 from .views import tipo_habitacion,tipo_habitacion_add, tipo_habitacion_modif,tipo_habitacion_eliminar, habitacion_eliminar
 from .views import tipo_habitacion,tipo_habitacion_add, habitacion,habitacion_add, index, habitacion_modif
 from .views import index_usuario,verificarReserva,recepcionista
-from .views import crear_cuenta, clientes, lista_clientes, eliminar_cliente
+from .views import crear_cuenta, clientes, lista_clientes, eliminar_cliente, modificar_perfil_user, eliminar_perfil
 from .views import modificar_perfil, login_view
 from .views import modificar_perfil
 from .views import perfil_cliente
@@ -27,4 +27,6 @@ urlpatterns = [
     path('login/', login_view, name='loginn'),
     path('eliminar_cliente/<id>',eliminar_cliente, name='eliminar_cliente' ),
     path('perfil_cliente', perfil_cliente, name='perfil_cliente'),
+    path('modificar_perfil_user/<id>', modificar_perfil_user, name='modificar_perfil_user'),
+    path('clientes_delete_user/<id>', eliminar_perfil, name='eliminar_perfil'),
 ]

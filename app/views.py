@@ -60,6 +60,42 @@ def eliminar_cliente(request,id):
     
     return render(request,"app/clientes_delete.html",contexto)
 
+#Eliminar perfil user
+def eliminar_perfil(request,id):
+    cliente=get_object_or_404(Cliente,run=id)
+    id = cliente.usuario_id
+    usuario=User.objects.get(id=id)
+    contexto={
+
+        "cliente":cliente
+    }
+
+    if request.method=="POST":
+        usuario.delete()
+        messages.success(request,"Cuenta eliminado correctamente")
+        return redirect(to="index_usuario")
+    
+    return render(request,"app/clientes_delete_user.html",contexto)
+
+def modificar_perfil_user(request,id):
+    modificar=get_object_or_404(Cliente,run=id)
+    
+    form = frmModifDatosCliente(instance=modificar)
+    contexto={
+        "form":form,
+        "modificar":modificar
+    }
+    
+    if request.method=="POST":
+        
+        form=frmModifDatosCliente(data=request.POST,instance=modificar)
+        
+        if form.is_valid():
+            form.save()
+            return redirect(to="index_usuario")
+
+    return render(request,"app/modificar_cliente_user.html",contexto)
+
 @login_required
 def perfil_cliente(request):
     usuario=request.user

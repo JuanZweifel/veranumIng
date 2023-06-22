@@ -55,6 +55,6 @@ class Reserva(models.Model):
     fecha_inicio=models.DateField(null=False)
     fecha_termino=models.DateField(null=False)
     total_reserva=models.PositiveIntegerField(null=False, validators=[MinValueValidator(1)])
-    run_cliente=models.ForeignKey(Cliente, on_delete=models.PROTECT)
+    run_cliente=models.ForeignKey(Cliente, on_delete=models.CASCADE)
     #run_empleado=models.ForeignKey(, on_delete=models.PROTECT)
     
