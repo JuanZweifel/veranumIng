@@ -35,10 +35,10 @@ class frmCrearCuenta(UserCreationForm):
         
         
 class frmPerfilCliente(forms.ModelForm):
-
+    run = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'XXXXXXXX-X'}))
     class Meta:
         model=Cliente
-        fields=["run","dv","primer_nombre","segundo_nombre","apellido_paterno","apellido_materno","correo"]
+        fields=["run","primer_nombre","segundo_nombre","apellido_paterno","apellido_materno","correo"]
         
         
 
@@ -49,7 +49,7 @@ class frmModifDatosCliente(forms.ModelForm):
         fields=["primer_nombre","segundo_nombre","apellido_paterno","apellido_materno","correo"]
 
 class frmRecepcionista(forms.Form):
-    rut = forms.IntegerField(label="Run sin digito verificador", validators=[MinValueValidator(1000000), MaxValueValidator(99999999)])
+    rut = forms.CharField(label="Run con digito verificador", max_length=10)
         
 class LoginForm(AuthenticationForm):
     pass

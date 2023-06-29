@@ -34,15 +34,10 @@ class Habitacion(models.Model):
     hotel=models.CharField(null=False,max_length=15, choices=HOTELES)
     
 class Cliente(models.Model):
-    DIGITOS_VERIFICADORES=[
-        ("1","1"),("2","2"),("3","3"),("4","4"),("5","5"),("6","6"),("7","7"),("8","8"),("9","9"),("0","0"),("K","K")
-    ]
-    
     
     usuario=models.OneToOneField(User, unique=True, related_name='perfil', on_delete=models.CASCADE)
     
-    run=models.PositiveIntegerField(primary_key=True, null=False, validators=[MinValueValidator(1000000), MaxValueValidator(99999999)])  
-    dv=models.CharField(null=False, max_length=1, choices=DIGITOS_VERIFICADORES) 
+    run=models.CharField(primary_key=True, null=False, max_length=10)   
     primer_nombre=models.CharField(max_length=30, null=False, validators=[validarletras])
     segundo_nombre=models.CharField(max_length=30, null=False, validators=[validarletras])
     apellido_paterno=models.CharField(max_length=30, null=False, validators=[validarletras])

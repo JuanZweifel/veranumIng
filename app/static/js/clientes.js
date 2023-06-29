@@ -5,9 +5,9 @@ let dataTableIsInitialized;
 
 const dataTableOptions = {
     columnDefs: [
-        {className: "centered", targets: [0,1,2,3,4,5,6,7] },
-        {orderable:false, targets:[1,3,5,6]},
-        {searchable:false,targets:[1,7]},
+        {className: "centered", targets: [0,1,2,3,4,5,6]},
+        {orderable:false, targets:[6]},
+        {searchable:false,targets:[1,6]},
     ],
     pageLength: 4,
     destroy: true,
@@ -41,15 +41,14 @@ const listaclientes=async()=>{
             content += `
                 <tr>
                     <td>${cliente.run}</td>
-                    <td>${cliente.dv}</td>
                     <td>${cliente.primer_nombre}</td>
                     <td>${cliente.segundo_nombre}</td>
                     <td>${cliente.apellido_paterno}</td>
                     <td>${cliente.apellido_materno}</td>
                     <td>${cliente.correo}</td>
                     <td>
-                    <a href="modificar_perfil/ ${cliente.run}" role="button" class="btn btn-primary text-light">Modificar</a>
-                    <a href="eliminar_cliente/ ${cliente.run}" role="button" class="btn btn-danger text-light">Eliminar</a> </td>
+                    <a href="modificar_perfil/${cliente.run}" role="button" class="btn btn-primary text-light">Modificar</a>
+                    <a href="eliminar_cliente/${cliente.run}" role="button" class="btn btn-danger text-light">Eliminar</a> </td>
                     </td>
                 </tr>`;
         });

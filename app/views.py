@@ -105,8 +105,6 @@ def perfil_cliente(request):
     contexto={
         "cliente":cliente
     }
-    
-    
     return render(request, "app/perfil_usuario.html", contexto)
 
 

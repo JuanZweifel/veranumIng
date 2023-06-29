@@ -7,7 +7,7 @@
 <div class="row p-5 mt-2">
     <div class="col-sm-2"></div>
     <div class="col-sm-8 ">
-        <form action="" method="post">
+        <form action="" id="formulario" method="post">
 
             <div class="">
                 
@@ -29,3 +29,7 @@
     <div class="col-sm-2"></div>
 </div>
 {%endblock contenido%}
+
+{% block script %}
+<script src={% static 'js/log.js' %}> </script>
+{% endblock script %}
